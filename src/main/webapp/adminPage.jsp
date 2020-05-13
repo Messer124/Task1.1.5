@@ -11,7 +11,8 @@
 </head>
 <body>
 
-<table class="box" cellspacing='0'>
+<table class="content-table">
+    <thead>
     <tr>
         <th>ID</th>
         <th>Role</th>
@@ -23,6 +24,8 @@
         <th>Delete</th>
         <th>Edit</th>
     </tr>
+    </thead>
+    <tbody>
     <c:forEach items="${userList}" var="user">
         <tr>
             <td>${user.id}</td>
@@ -36,6 +39,7 @@
             <td> <a href="/edit?id=${user.id}">Edit</a> </td>
         </tr>
     </c:forEach>
+    </tbody>
 </table>
 
 <a href="<c:url value="/logout"/>">Logout</a>

@@ -1,14 +1,9 @@
 package servlet.filter;
-
-import daoFactory.UserDaoFactory;
-import dao.interfaceDao.UserDAO;
 import model.User;
 import service.UserService;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -40,7 +35,6 @@ public class AuthFilter implements Filter {
                 }
             } else session.setAttribute("role", "forbidden");
         }
-
         chain.doFilter(request, response);
     }
 
