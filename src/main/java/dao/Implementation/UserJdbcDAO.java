@@ -1,6 +1,6 @@
-package dao;
+package dao.Implementation;
 
-import interfaceDao.UserDAO;
+import dao.interfaceDao.UserDAO;
 import model.User;
 import util.DBHelper;
 import java.sql.*;

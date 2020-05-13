@@ -1,7 +1,9 @@
 package servlet.filter;
+
 import daoFactory.UserDaoFactory;
-import interfaceDao.UserDAO;
+import dao.interfaceDao.UserDAO;
 import model.User;
+import service.UserService;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -10,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static java.util.Objects.nonNull;
 
 @WebFilter(urlPatterns = "/login")
 public class AuthFilter implements Filter {
@@ -22,45 +23,25 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-        UserDAO dao = new UserDaoFactory().createDAO();
-
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-
-        boolean isUserExist = dao.isUserExist(login);
-
         HttpSession session = req.getSession();
+        String login = req.getParameter("login");
 
-        if (nonNull(session.getAttribute("login")) && nonNull(session.getAttribute("password"))) {
-            String role = session.getAttribute("role").toString();
-            moveToMenu(req, resp, role);
-        } else if (isUserExist) {
-            User user = dao.selectUserByLogin(login);
-            String role = user.getRole();
-
-            while (!user.getPassword().equals(password)) {
-                req.getRequestDispatcher("loginPage.jsp").forward(req, resp);
-            }
-
-            session.setAttribute("password", password);
-            session.setAttribute("login", login);
-            session.setAttribute("role", role);
-            moveToMenu(req, resp, role);
+        if (login == null) {
+            session.setAttribute("role", "forbidden");
         } else {
-            req.getRequestDispatcher("loginPage.jsp").forward(req, resp);
+            boolean isUserExist = UserService.getInstance().isUserExist(login);
+
+            if (isUserExist) {
+                User user = UserService.getInstance().selectUserByLogin(login);
+                if (!user.getPassword().equals(req.getParameter("password"))) {
+                    session.setAttribute("role", "forbidden");
+                } else {
+                    session.setAttribute("role", user.getRole());
+                }
+            } else session.setAttribute("role", "forbidden");
         }
-        //chain.doFilter(request, response);
-    }
 
-    private void moveToMenu(HttpServletRequest req, HttpServletResponse resp, String role) throws ServletException, IOException {
-
-        if (role.equals("admin")) {
-            req.getRequestDispatcher("/admin").forward(req, resp);
-        } else if (role.equals("user")) {
-            req.getRequestDispatcher("/user").forward(req, resp);
-        }
-
+        chain.doFilter(request, response);
     }
 
     @Override

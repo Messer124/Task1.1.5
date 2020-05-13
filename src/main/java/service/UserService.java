@@ -1,9 +1,8 @@
 package service;
 
 import daoFactory.UserDaoFactory;
-import interfaceDao.UserDAO;
+import dao.interfaceDao.UserDAO;
 import model.User;
-import org.hibernate.Query;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -28,26 +27,8 @@ public class UserService{
         return userService;
     }
 
-    public void insertUser(HttpServletRequest req) {
-        if (!req.getServletPath().equals("/addUser")) {
-            System.out.println("wrong url for the action");
-            return;
-        }
-
-        String role = req.getParameter("role");
-        if (!role.matches("user|admin") || role.isEmpty()) return;
-
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
-        String country = req.getParameter("country");
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-
-        if (name.isEmpty() || email.isEmpty() || country.isEmpty() || login.isEmpty() || password.isEmpty()) {
-            return;
-        }
-
-        userDAO.insertUser(new User(role, name, email, country, login, password));
+    public void insertUser(User user) {
+        userDAO.insertUser(user);
     }
 
     public boolean isUserExist(String login) {
@@ -63,35 +44,15 @@ public class UserService{
         return userDAO.selectAllUsers();
     }
 
-    public void deleteUser(HttpServletRequest req) {
-        Long id = Long.parseLong(req.getParameter("id"));
+    public void deleteUser(Long id) {
         userDAO.deleteUser(id);
     }
 
-    public void updateUser(HttpServletRequest req) {
-        Long id = Long.parseLong(req.getParameter("id"));
-        String role = req.getParameter("role");
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
-        String country = req.getParameter("country");
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+    public void updateUser(User user) {
+        userDAO.updateUser(user);
+    }
 
-
-        User current = userDAO.selectUserById(id);
-
-        if (role.isEmpty())  {
-            role = current.getRole();
-        } else {
-            if (!role.matches("user|admin")) return;
-        }
-
-        if (name.isEmpty()) name = current.getName();
-        if (email.isEmpty()) email = current.getEmail();
-        if (country.isEmpty()) country = current.getCountry();
-        if (login.isEmpty()) login = current.getLogin();
-        if (password.isEmpty()) password = current.getPassword();
-
-        userDAO.updateUser(new User(id, role, name, email, country, login, password));
+    public User selectUserById(Long id) {
+        return userDAO.selectUserById(id);
     }
 }

@@ -11,23 +11,6 @@
 </head>
 <body>
 
-<%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    response.setHeader("Pragma", "no-cache");
-    response.setHeader("Expires", "0");
-
-    String role = "";
-    try {
-        role = session.getAttribute("role").toString();
-    } catch (NullPointerException e) {
-        e.printStackTrace();
-    }
-
-    if (role.equals("")) {
-        response.sendRedirect("/logout");
-    }
-%>
-
 <table>
     <tr>
         <th>ID</th>

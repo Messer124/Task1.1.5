@@ -1,3 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #191919;
+}
+th {
+    font-weight: normal;
+    color: #3498db;
+    padding: 10px 15px;
+}
+td {
+    color: #2ecc71;
+    border-top: 1px solid #e8edff;
+    padding: 10px 15px;
+}
+tr:hover td {background: #e8edff;}
+
 ul {
     padding: 0;
 }
@@ -29,15 +47,3 @@ a:active {
     background: #2ecc71;
     color: white;
 }
-
-th {
-    font-weight: normal;
-    color: #039;
-    padding: 10px 15px;
-}
-td {
-    color: #669;
-    border-top: 1px solid #e8edff;
-    padding: 10px 15px;
-}
-tr:hover td {background: #e8edff;}

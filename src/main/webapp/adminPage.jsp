@@ -11,36 +11,6 @@
 </head>
 <body>
 
-<%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    response.setHeader("Pragma", "no-cache");
-    response.setHeader("Expires", "0");
-
-    String role = "";
-    try {
-        role = session.getAttribute("role").toString();
-    } catch (NullPointerException e) {
-        e.printStackTrace();
-    }
-    if (role.equals("user")) {
-        response.sendRedirect("/usere");
-    } else if (role.equals("") || !role.equals("admin")) {
-        response.sendRedirect("/logout");
-    }
-%>
-
-<form class="box" method="post" action="/admin">
-    <h1>Edit user</h1>
-    <input type="number" name="id" placeholder="ID"> <br>
-    <input type="text" name="role" placeholder="Role"> <br>
-    <input type="text" name="name" placeholder="Username"> <br>
-    <input type="text" name="email" placeholder="E-mail"> <br>
-    <input type="text" name="country" placeholder="Country"> <br>
-    <input type="text" name="login" placeholder="Login"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-    <input type="submit" value="Edit">
-</form>
-
 <table class="box" cellspacing='0'>
     <tr>
         <th>ID</th>
@@ -50,6 +20,8 @@
         <th>Country</th>
         <th>Login</th>
         <th>Password</th>
+        <th>Delete</th>
+        <th>Edit</th>
     </tr>
     <c:forEach items="${userList}" var="user">
         <tr>
@@ -60,13 +32,11 @@
             <td>${user.country}</td>
             <td>${user.login}</td>
             <td>${user.password}</td>
-            <td>
-                <a href="/delete?id=${user.id}">Delete</a>
-            </td>
+            <td> <a href="/delete?id=${user.id}">Delete</a> </td>
+            <td> <a href="/edit?id=${user.id}">Edit</a> </td>
         </tr>
     </c:forEach>
 </table>
-
 
 <a href="<c:url value="/logout"/>">Logout</a>
 
