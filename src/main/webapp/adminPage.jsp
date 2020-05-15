@@ -35,8 +35,8 @@
             <td>${user.country}</td>
             <td>${user.login}</td>
             <td>${user.password}</td>
-            <td> <a href="/delete?id=${user.id}">Delete</a> </td>
-            <td> <a href="/edit?id=${user.id}">Edit</a> </td>
+            <td><a href="/delete?id=${user.id}">Delete</a></td>
+            <td><a href="/edit?id=${user.id}">Edit</a></td>
         </tr>
     </c:forEach>
     </tbody>

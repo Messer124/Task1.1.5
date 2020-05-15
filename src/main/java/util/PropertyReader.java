@@ -6,8 +6,8 @@ import java.util.Properties;
 
 public class PropertyReader {
     public String read(String property) throws IOException {
-        ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        InputStream stream = cl.getResourceAsStream("config.properties");
+        ClassLoader classLoaderl = Thread.currentThread().getContextClassLoader();
+        InputStream stream = classLoaderl.getResourceAsStream("config.properties");
         Properties properties = new Properties();
         properties.load(stream);
         return properties.getProperty(property);
