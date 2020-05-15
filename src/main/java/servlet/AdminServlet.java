@@ -18,9 +18,8 @@ public class AdminServlet extends HttpServlet {
         resp.setHeader("Pragma", "no-cache");
         resp.setHeader("Expires", "0");
 
-        String role = req.getSession().getAttribute("role").toString();
-        if (role.equals("admin")) showAdminPage(req, resp);
-        else resp.sendRedirect("/logout");
+        showAdminPage(req, resp);
+
     }
 
     protected void showAdminPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

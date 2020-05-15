@@ -23,7 +23,7 @@ public class loginServlet extends HttpServlet {
         String role = session.getAttribute("role").toString();
 
         if (role.equals("forbidden")) {
-            resp.sendRedirect("loginPage.jsp");
+            resp.sendRedirect("accessError.jsp");
 
         } else if (role.matches("admin|user")) {
             session.setAttribute("password", req.getParameter("password"));
