@@ -26,6 +26,7 @@ public class AuthFilter implements Filter {
 
         String login = req.getParameter("login");
         String path = req.getServletPath();
+        String role;
 
         switch (path) {
             case "/login":
@@ -45,20 +46,19 @@ public class AuthFilter implements Filter {
                 }
                 break;
             case "/admin":
-                String role = session.getAttribute("role").toString();
+                role = session.getAttribute("role").toString();
                 if (!role.equals("admin")) {
                     resp.sendRedirect("accessError.jsp");
                     return;
                 }
                 break;
             case "/user":
-                String newRole = session.getAttribute("role").toString();
-                if (!newRole.matches("user|admin")) {
+                role = session.getAttribute("role").toString();
+                if (!role.matches("user|admin")) {
                     resp.sendRedirect("accessError.jsp");
                 }
                 break;
         }
-
         chain.doFilter(request, response);
     }
 
