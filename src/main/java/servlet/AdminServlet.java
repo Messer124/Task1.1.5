@@ -19,7 +19,6 @@ public class AdminServlet extends HttpServlet {
         resp.setHeader("Expires", "0");
 
         showAdminPage(req, resp);
-
     }
 
     protected void showAdminPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
