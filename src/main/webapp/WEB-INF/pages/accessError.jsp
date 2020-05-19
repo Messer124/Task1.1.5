@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title>Login Form</title>
     <style>
-        <%@include file='css/style.css' %>
+        <%@include file='/css/style.css' %>
     </style>
 </head>
 <body>

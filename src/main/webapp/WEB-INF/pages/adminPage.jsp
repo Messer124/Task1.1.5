@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title>Login Form</title>
     <style>
-        <%@include file='css/styleAdmin.css' %>
+        <%@include file='../../css/styleAdmin.css' %>
     </style>
 </head>
 <body>

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title>User Form</title>
     <style>
-        <%@include file='css/styleUser.css' %>
+        <%@include file='../../css/styleUser.css' %>
     </style>
 </head>
 <body>

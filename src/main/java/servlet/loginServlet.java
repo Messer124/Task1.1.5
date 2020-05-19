@@ -14,7 +14,7 @@ public class loginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("loginPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/pages/loginPage.jsp").forward(req, resp);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class loginServlet extends HttpServlet {
         String role = session.getAttribute("role").toString();
 
         if (role.equals("forbidden")) {
-            resp.sendRedirect("accessError.jsp");
+            resp.sendRedirect("WEB-INF/pages/accessError.jsp");
 
         } else if (role.matches("admin|user")) {
             session.setAttribute("password", req.getParameter("password"));

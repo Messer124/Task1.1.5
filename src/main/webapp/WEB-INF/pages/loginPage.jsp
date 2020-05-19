@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title>Login Form</title>
     <style>
-        <%@include file='css/style.css' %>
+        <%@include file='../../css/style.css' %>
     </style>
 </head>
 <body>
@@ -16,7 +16,7 @@
 </form>
 
 <ul>
-    <li><a href="registerPage.jsp">Go to register page</a></li>
+    <li><a href="WEB-INF/pages/registerPage.jsp">Go to register page</a></li>
 </ul>
 
 </body>

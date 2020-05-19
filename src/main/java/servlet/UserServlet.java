@@ -29,6 +29,6 @@ public class UserServlet extends HttpServlet {
         List<User> userList = new ArrayList<>();
         userList.add(user);
         req.setAttribute("userList", userList);
-        req.getRequestDispatcher("userPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/pages/userPage.jsp").forward(req, resp);
     }
 }
