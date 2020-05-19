@@ -25,6 +25,6 @@ public class AdminServlet extends HttpServlet {
     protected void showAdminPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> users = UserService.getInstance().selectAllUsers();
         req.setAttribute("userList", users);
-        req.getRequestDispatcher("WEB-INF/pages/adminPage.jsp").forward(req, resp);
+        req.getRequestDispatcher("pages/adminPage.jsp").forward(req, resp);
     }
 }
